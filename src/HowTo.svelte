@@ -5,5 +5,9 @@
 </style>
 
 <div bp="grid">
-  <img bp="offset-5@md 4@md 12@sm" src="handwashing.png" alt="How to wash your hands." />
+  <img
+    bp="offset-5@md 4@md 12@sm"
+    src="handwashing.png"
+    alt="How to wash your hands."
+  />
 </div>

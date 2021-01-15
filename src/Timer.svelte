@@ -1,7 +1,10 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import ProgressBar from './ProgressBar.svelte';
-  $: progress = (totalSeconds - secondsLeft) * 100 / totalSeconds;
 
+  $: progress = ((totalSeconds - secondsLeft) * 100) / totalSeconds;
+
+  const eventDispatcher = createEventDispatcher();
   const totalSeconds = 20;
   let secondsLeft = totalSeconds;
   let isRunning = false;
@@ -15,9 +18,10 @@
         isRunning = false;
         secondsLeft = totalSeconds;
         clearInterval(timer);
+        eventDispatcher('end');
       }
     }, 1000);
-  }
+  };
 </script>
 
 <style>
@@ -39,7 +43,12 @@
 <div bp="grid">
   <h2 bp="offset-5@md 4@md 12@sm">Seconds Left: {secondsLeft}</h2>
 </div>
-<ProgressBar progress={progress} />
+<ProgressBar {progress} />
 <div bp="grid">
-  <button on:click={handleStart} disabled={isRunning} bp="offset-5@md 4@md 12@sm" class="start">Start</button>
+  <button
+    on:click={handleStart}
+    disabled={isRunning}
+    bp="offset-5@md 4@md 12@sm"
+    class="start">Start</button
+  >
 </div>
